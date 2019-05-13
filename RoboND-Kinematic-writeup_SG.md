@@ -1,11 +1,8 @@
 ## Project: Kinematics Pick & Place
-### Writeup Template: You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
 
 ---
 
-
 **Steps to complete the project:**  
-
 
 1. Set up your ROS Workspace.
 2. Download or clone the [project repository](https://github.com/udacity/RoboND-Kinematics-Project) into the ***src*** directory of your ROS Workspace.  
@@ -13,7 +10,6 @@
 4. Launch in [demo mode](https://classroom.udacity.com/nanodegrees/nd209/parts/7b2fd2d7-e181-401e-977a-6158c77bf816/modules/8855de3f-2897-46c3-a805-628b5ecf045b/lessons/91d017b1-4493-4522-ad52-04a74a01094c/concepts/ae64bb91-e8c4-44c9-adbe-798e8f688193).
 5. Perform Kinematic Analysis for the robot following the [project rubric](https://review.udacity.com/#!/rubrics/972/view).
 6. Fill in the `IK_server.py` with your Inverse Kinematics code. 
-
 
 [//]: # (Image References)
 
@@ -34,18 +30,14 @@
 ---
 ### Writeup / README
 
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  
-
-You're reading it!
-
 ### Kinematic Analysis
 #### 1. Run the forward_kinematics demo and evaluate the kr210.urdf.xacro file to perform kinematic analysis of Kuka KR210 robot and derive its DH parameters.
 
-Following snapshot shows Xacro file from where Kua robot's DH parameters are being picked up
+Following snapshot shows Xacro file from where Kuka robot's DH parameters are being picked up
 
 ![alt text][image4]
 
-Following snapshot shows drived table from Xacro / URDF
+Following snapshot shows derived table from Xacro / URDF
 
 ![alt text][image5]
 
@@ -90,7 +82,7 @@ Theta 4,5 & 6 Calculation
 
 Here I'll talk about the code, what techniques I used, what worked and why, where the implementation might fail and how I might improve it if I were going to pursue this project further.  
 
-1. Forward Kinematics implemeted as compositions of succesive transformations
+1. Forward Kinematics implemented as compositions of successive transformations
     ```
     #Composition - Forward
     T0_2 = (T0_1 * T1_2)
@@ -100,9 +92,9 @@ Here I'll talk about the code, what techniques I used, what worked and why, wher
     T0_6 = (T0_5 * T5_6)
     T0_7 = (T0_6 * T6_7)
     ```
-2. Transformations between successive joints impemented as per DH table
+2. Transformations between successive joints implemented as per DH table
     ```
-    ### Homogenous Transform
+    ### Homogeneous Transform
 	#Base link to Link1
 	T0_1 = Matrix([[             cos(q1),             -sin(q1),            0,              a0],
 		       [ sin(q1)*cos(alpha0),  cos(q1)*cos(alpha0), -sin(alpha0), -sin(alpha0)*d1],
@@ -164,9 +156,9 @@ Here I'll talk about the code, what techniques I used, what worked and why, wher
 	     alpha5:-hfPi,  a5:     0,  d6:        0,
 	     alpha6:    0,  a6:     0,  d7:    0.303,   q7: 0}	
     ```
-5. Inverse kinematics, first divided into 2 seperate problem of Wrist center position due to joint 1,2 & 3. And rotations (Spherical wrist) due to joint 4,5 & 6
+5. Inverse kinematics, first divided into 2 separate problem of Wrist center position due to joint 1,2 & 3. And rotations (Spherical wrist) due to joint 4,5 & 6
    - Dividing this way helps solve the IK using analytic solution
-6. Theta 1,2 & 3 calculated using trigonometry - Cosine Laws. Joint 3 was harder to visulize, where I needed some help.
+6. Theta 1,2 & 3 calculated using trigonometry - Cosine Laws. Joint 3 was harder to visualize, where I needed some help.
     ```
     # Calculate joint angles using Geometric IK method
     wcx = px - (d7).subs(s) * Rrpy[0,2]
