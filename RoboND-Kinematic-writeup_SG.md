@@ -204,7 +204,6 @@ Observation & Improvements:
 2. Iteratively error is adding up in EE calculation
 3. Error correction mechanism as per actual received EE location & one calculated through Forward Kinematics, might be able to improve the error
 
-And just for fun, another example image:
 ![alt text][image3]
 
 
